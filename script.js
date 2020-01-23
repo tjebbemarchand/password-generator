@@ -7,11 +7,11 @@ const symbolsElement = document.querySelector("#symbols");
 const generateBtn = document.querySelector("#generate");
 const clipboardBtn = document.querySelector("#clipboard");
 
-const randomCharacters = {
-    lower: getRandomLower(),
-    upper: getRandomUpper(),
-    number: getRandomNumber(),
-    symbol: getRandomSymbol()
+const randomCharacterFunctions = {
+    hasLower: getRandomLower,
+    hasUpper: getRandomUpper,
+    hasNumber: getRandomNumber,
+    hasSymbol: getRandomSymbol
 };
 
 // Generator functions.
@@ -32,10 +32,42 @@ function getRandomSymbol() {
     return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
+function generatePassword(passwordLength, hasUpper, hasLower, hasNumber, hasSymbol) {
+    // 1. Initialize password variable.
+    let generatedPassword = "";
+
+    // 2. Filter out unchecked types.
+    const typesCount = hasLower + hasUpper + hasNumber + hasSymbol;
+    const typesArray = [{ hasUpper }, { hasLower }, { hasNumber }, { hasSymbol }].filter(
+        item => Object.values(item)[0]
+    );
+    if (typesCount === 0) return "";
+
+    // 3. Loop over passwordLength. Call generator function for each type.
+    for (let i = 0; i < passwordLength; i += typesCount) {
+        typesArray.forEach(type => {
+            const funcName = Object.keys(type)[0];
+            generatedPassword += randomCharacterFunctions[funcName]();
+        });
+    }
+
+    // 4. Add final password to password variable and return.
+    return generatedPassword.slice(0, passwordLength);
+}
+
+// Generate password on generate button click.
 generateBtn.addEventListener("click", () => {
-    const length = +lengthElement.value; // Convert string to number with "+" sign.
+    const passwordLength = +lengthElement.value; // Convert string to number with "+" sign.
     const hasUpper = uppercaseElement.checked;
     const hasLower = lowercaseElement.checked;
     const hasNumber = numbersElement.checked;
-    const hasSymbols = symbolsElement.checked;
+    const hasSymbol = symbolsElement.checked;
+
+    resultElement.innerText = generatePassword(
+        passwordLength,
+        hasUpper,
+        hasLower,
+        hasNumber,
+        hasSymbol
+    );
 });
