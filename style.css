@@ -1,0 +1,113 @@
+:root {
+    --primary-color-dark: #0c093b;
+    --primary-color: #17135d;
+    --secondary-color: #4f51b3;
+    --border-radius: 2px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: var(--secondary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+h2 {
+    font-size: 3rem;
+}
+
+.container {
+    background-color: var(--primary-color);
+    padding: 3rem;
+    color: #fff;
+    border-radius: var(--border-radius);
+}
+
+.container > *:not(:last-child) {
+    margin-bottom: 2rem;
+}
+
+.container h2 {
+    text-align: center;
+}
+
+.result-container {
+    display: flex;
+}
+
+.result-container .result {
+    width: 100%;
+    height: 4rem;
+    background-color: var(--primary-color-dark);
+    font-size: 1.8rem;
+    margin-right: 0.5rem;
+    padding-left: 1.5rem;
+    line-height: 2.2;
+    border-radius: var(--border-radius);
+}
+
+.result-container .copy-password-btn {
+    width: 6rem;
+    border: none;
+    background-color: var(--secondary-color);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: 200ms ease;
+}
+
+.result-container .copy-password-btn:hover {
+    background-color: var(--primary-color-dark);
+}
+
+.result-container .copy-password-btn img {
+    width: 1.5rem;
+}
+
+.settings {
+    font-size: 1.6rem;
+}
+
+.setting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.setting input {
+    font-size: 1.4rem;
+    padding: 0.2rem;
+}
+
+.setting:not(:last-child) {
+    margin: 1.5rem 0;
+}
+
+.generate-password-btn {
+    display: block;
+    font-size: 1.6rem;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    border: none;
+    padding: 1rem 1.5rem;
+    background-color: var(--secondary-color);
+    cursor: pointer;
+    transition: 200ms ease;
+}
+
+.generate-password-btn:hover {
+    background-color: var(--primary-color-dark);
+}
